@@ -1,4 +1,5 @@
 <?
+//Copyright (c) 2015 Александр Смит (https://github.com/DarkScorpion)
 class Tempi
 {
   private $_leftBound;

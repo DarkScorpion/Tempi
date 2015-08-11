@@ -25,7 +25,7 @@ class Tempi
       $rb = $this->_rightBound;
       foreach ($dataArr as $key => $value)
       {
-        $pattern = "$lb$key$rb";
+        $pattern = $lb.$key.$rb;
         $html = str_replace($pattern, $value, $html);
       }
       return $html;

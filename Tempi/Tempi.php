@@ -5,6 +5,9 @@ class Tempi
   private $_leftBound;
   private $_rightBound;
 
+  private $_isDelete = false;
+  private $_defaultReplace = '';
+
   public function __construct ($leftBound = '##', $rightBound = null)
   {
     if($rightBound)
@@ -23,14 +26,34 @@ class Tempi
     {
       $lb = $this->_leftBound;
       $rb = $this->_rightBound;
+
       foreach ($dataArr as $key => $value)
       {
         $pattern = $lb.$key.$rb;
         $html = str_replace($pattern, $value, $html);
       }
+
+      if ($this->_isDelete)
+      {
+        $delPattern = '/'.$lb.'.*'.$rb.'/i';
+        $html = preg_replace($delPattern, $this->_defaultReplace, $html);
+      }
+
       return $html;
+
     } else {
       throw new Exception('Tempi.replace param: Must be array or object');
     }
   }
+
+  public function setDeleteVars($value)
+  {
+    $this->_isDelete = $value;
+  }
+
+  public function setDefaultReplace($value)
+  {
+    $this->_defaultReplace = $value;
+  }
+
 }
